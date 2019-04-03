@@ -1,0 +1,325 @@
+import java.util.Scanner;
+
+class POS{
+	int x;
+	int y;
+	
+	POS(int x,int y){
+		this.x = x;
+		this.y = y;
+	}
+}
+
+public class tictactoe {
+	static final int N = 3;
+	static final int STEP = 9;
+	static final int COMPUTER = 1;
+	static final int MANAGER = -1;
+	static final int COMPUTER2 = 2;
+	static int CurrentDepth;
+	static int player;
+	static int[][] chess = new int[N][N];
+	static int[][] TempChess = new int[N][N];    //虚拟的chess
+	static POS BestPosMark = null;
+	static Scanner in = new Scanner(System.in);
+	
+	static void DrawBoard()
+	{
+	    int i, j;
+	    for (i = 0;i < N;i++)
+	    {
+	        for (j = 0;j < N;j++)
+	        {
+	            if (chess[i][j] == COMPUTER)
+	                System.out.print("| X ");
+	            else if (chess[i][j] == MANAGER)
+	            	System.out.print("| O ");
+	            else
+	            	System.out.print("|   ");
+	        }
+	        System.out.println("|");
+	    }
+	}
+	static int isEnd()
+	{
+	    int i, j;
+	    int count = 0;
+	    for (i = 0;i < N;i++)   //行
+	    {
+	        count = 0;
+	        for (j = 0;j < N;j++)
+	            count += chess[i][j];
+	        if (count == 3 || count == -3)
+	            return count / 3;
+	    }
+	    for (j = 0;j < N;j++)   //列
+	    {
+	        count = 0;
+	        for (i = 0;i < N;i++)
+	            count += chess[i][j];
+	        if (count == 3 || count == -3)
+	            return count / 3;
+	    }
+	    count = 0;
+	    count = chess[0][0] + chess[1][1] + chess[2][2];
+	    if (count == 3 || count == -3)
+	        return count / 3;
+	    count = chess[0][2] + chess[1][1] + chess[2][0];
+	    if (count == 3 || count == -3)
+	        return count / 3;
+	    return 0;
+	}
+	static int CountBlank(POS[] SaveBlank)
+	{
+	    int i, j;
+	    int count = 0;
+	    for (i = 0;i < N;i++)
+	    {
+	        for (j = 0;j < N;j++)
+	        {
+	            if (chess[i][j] == 0)   //若未被占
+	            {
+	                SaveBlank[count] =new POS(i,j);
+	                count++;
+	            }
+	        }
+	    }
+	    return count;
+	}
+	static int Evaluate()
+	{
+	    int flag = 1;
+	    int i, j;
+	    int count = 0;
+	    if (isEnd() == COMPUTER)    //将自己的优势设置为无限大
+	        return Integer.MAX_VALUE;
+	    if (isEnd() == MANAGER)     //将自己的劣势设置为无限大
+	        return -Integer.MAX_VALUE;
+	    for (i = 0;i < N;i++)
+	    {
+	        for (j = 0;j < N;j++)
+	        {
+	            if (chess[i][j] == 0)
+	                TempChess[i][j] = COMPUTER; //将剩余的地方全放上电脑棋子
+	            else
+	                TempChess[i][j] = chess[i][j];
+	        }
+	    }
+	    //以下为电脑,记录若放满棋子后连成三个棋子的数量，越多则代表位置越重要
+	    for (i = 0;i < N;i++)
+	    {
+	        for (j = 0;j < N;j++)
+	            count += chess[i][j];
+	        count /= 3;
+	    }
+	    for (j = 0;j < N;j++)
+	    {
+	        for (i = 0;i < N;i++)
+	            count += chess[i][j];
+	        count /= 3;
+	    }
+	    count += (TempChess[0][0] + TempChess[1][1] + TempChess[2][2]) / 3;
+	    count += (TempChess[0][2] + TempChess[1][1] + TempChess[2][0]) / 3;
+
+	    //以下为玩家
+	    for (i = 0;i < N;i++)
+	    {
+	        for (j = 0;j < N;j++)
+	        {
+	            if (chess[i][j] == 0)
+	                TempChess[i][j] = MANAGER;  //将剩余的地方全放上电脑棋子
+	            else
+	                TempChess[i][j] = chess[i][j];
+	        }
+	    }
+	    for (i = 0;i < N;i++)
+	    {
+	        for (j = 0;j < N;j++)
+	            count += chess[i][j];
+	        count /= 3;
+	    }
+	    for (j = 0;j < N;j++)
+	    {
+	        for (i = 0;i < N;i++)
+	            count += chess[i][j];
+	        count /= 3;
+	    }
+	    count += (TempChess[0][0] + TempChess[1][1] + TempChess[2][2]) / 3;
+	    count += (TempChess[0][2] + TempChess[1][1] + TempChess[2][0]) / 3;
+
+	    return count;   //count是根据对电脑的优势和对玩家的优势相减综合算出的
+	}
+	static void RemoveChess(POS MarkPos)
+	{
+	    chess[MarkPos.x][MarkPos.y] = 0;
+	    player = (player == COMPUTER) ? MANAGER : COMPUTER;
+	}
+	static void SetChess(POS MarkPos)
+	{
+	    chess[MarkPos.x][MarkPos.y] = player;
+	    player = (player == COMPUTER) ? MANAGER : COMPUTER;
+	}
+	static int MaxMinSearch(int depth)
+	{
+	    int BestValue = 0;
+	    int Value = 0;
+	    int i, count = 0;
+	    POS[] SaveBlank = new POS[STEP];
+	    if (COMPUTER == isEnd() || MANAGER == isEnd())
+	        return Evaluate();
+	    if (depth == 0)
+	        return Evaluate();
+	    if (player == COMPUTER)
+	        BestValue = -Integer.MAX_VALUE;
+	    if (player == MANAGER)
+	        BestValue = Integer.MAX_VALUE;
+	    count = CountBlank(SaveBlank);
+	    for (i = 0;i < count;i++)
+	    {
+	        POS MarkPos = SaveBlank[i];
+	        SetChess(MarkPos);
+	        Value = MaxMinSearch(depth - 1);
+	        RemoveChess(MarkPos);
+	        if (player == MANAGER)
+	        {
+	            if (Value < BestValue)
+	            {
+	                BestValue = Value;
+	                if (depth == CurrentDepth)
+	                {
+	                    BestPosMark = MarkPos;
+	                }
+	            }
+	        }
+	        else if (player == COMPUTER)
+	        {
+	            if (Value > BestValue)
+	            {
+	                BestValue = Value;
+	                if (depth == CurrentDepth)
+	                {
+	                    BestPosMark = MarkPos;
+	                }
+	            }
+	        }
+	    }
+	    return BestValue;
+	}
+	static void ComPlay()
+	{
+		int x;
+		int y;
+	    MaxMinSearch(CurrentDepth);
+	    x = BestPosMark.x + 1;
+	    y = BestPosMark.y + 1;
+	    System.out.println("电脑落子的位置为：" + x + " " + y);
+	    chess[BestPosMark.x][BestPosMark.y] = COMPUTER;
+	}
+	static void ManPlay()
+	{
+		int x = 0;
+		int y = 0;
+	    System.out.print("请输入您的落子位置:");
+	    if(in.hasNextLine()){
+	    	x = in.nextInt();
+	    	y = in.nextInt();
+	    }
+	    POS man =new POS(x,y);
+	    man.x--;
+	    man.y--;
+	    chess[man.x][man.y] = MANAGER;
+	}
+	static void InitBoard()
+	{
+	    int i, j;
+	    for (i = 0;i < N;i++)
+	        for (j = 0;j < N;j++)
+	            TempChess[i][j] = chess[i][j] = 0;
+	}
+	static void WhoPlayFirst()
+	{
+	    int ch;
+	    System.out.println("请选择您的落子先后：1.先手 2.后手");
+	    ch = in.nextInt();
+	    player = (ch == 1) ? MANAGER : COMPUTER;
+	}
+	
+	public static void main(String[] args) {
+		int step = 0;
+	    CurrentDepth = STEP-1;
+	    InitBoard();
+	    WhoPlayFirst();
+	    if (player == MANAGER)
+	    {
+	        for (step = 1;step <= STEP;)
+	        {
+	            ManPlay();
+	            DrawBoard();
+	            if (isEnd()==MANAGER)
+	            {
+	                System.out.println("201621123010获胜!!!");
+	                System.exit(0);
+	            }
+	            step++;
+	            CurrentDepth--;
+	            if (CurrentDepth == 0)
+	            {
+	            	System.out.println("平局!!!");
+	                System.exit(0);
+	            }
+	            player = (player == COMPUTER) ? MANAGER : COMPUTER;
+	            ComPlay();
+	            DrawBoard();
+	            if(isEnd()==COMPUTER)
+	            {
+	            	System.out.println("电脑获胜!!!");
+	                System.exit(0);
+	            }
+	            step++;
+	            CurrentDepth--;
+	            if (CurrentDepth == 0)
+	            {
+	            	System.out.println("平局!!!");
+	                System.exit(0);
+	            }
+	            player = (player == COMPUTER) ? MANAGER : COMPUTER;
+	        }
+	    }
+	    if (player == COMPUTER)
+	    {
+	        for (step = 1;step <= STEP;)
+	        {
+	            ComPlay();
+	            DrawBoard();
+	            if (isEnd()==COMPUTER)
+	            {
+	            	System.out.println("电脑获胜!!!");
+	                System.exit(0);
+	            }
+	            step++;
+	            CurrentDepth--;
+	            if (CurrentDepth == 0)
+	            {
+	            	System.out.println("平局!!!");
+	                System.exit(0);
+	            }
+	            player = (player == COMPUTER) ? MANAGER : COMPUTER;
+	            ManPlay();
+	            DrawBoard();
+	            if(isEnd()==MANAGER)
+	            {
+	                System.out.println("201621123010获胜!!!");
+	                System.exit(0);
+	            }
+	            step++;
+	            CurrentDepth--;
+	            if (CurrentDepth == 0)
+	            {
+	                System.out.println("平局!!!");
+	                System.exit(0);
+	            }
+	            player = (player == COMPUTER) ? MANAGER : COMPUTER;
+	        }
+	    }
+	}
+}
