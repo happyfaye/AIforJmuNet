@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>井字棋</title>
+    <link rel="stylesheet" href="css/pane.css">
+    <link rel="stylesheet" href="css/chessman.css">
+    <link rel="stylesheet" href="font/icon/material-icons.css">
+</head>
+
+<body>
+    <div class="pane"></div>
+    <div class="chessman">
+        A方<i class="material-icons circle">panorama_fish_eye</i>
+        B方<i class="material-icons cross">clear</i>
+    </div>
+    <form action="" name="settings">
+        <input type="radio" name="mode" value="vs" >Player 1 vs Player 2 <br>
+        <input type="radio" name="mode" value="vscom" checked>Player vs Computer <br>
+        <input type="radio" name="mode" value="com">Computer vs Computer <br>
+    </form>
+    <button onclick="GameStart()" id="start-btn">开始</button>
+</body>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+<script src="js/ai.js"></script>
+</html>
