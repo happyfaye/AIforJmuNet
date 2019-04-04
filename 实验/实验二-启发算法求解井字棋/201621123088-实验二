@@ -1,0 +1,176 @@
+#include <iostream> 
+#include <string> 
+#include <stdio.h>
+#include<conio.h>
+#define COM -1
+#define MAN 1
+#define STEP 9
+#define DRAW 0
+#define ROW 3
+#define COL 3
+#define MAX_NUM 1000;
+using namespace std;
+
+const int MAX_MOVES = 9;
+void printBoard(char board[3][3]);
+void getNextMove(char board[3][3]);
+void win(char board[3][3]);
+void whowin(char key);
+int foot = 0;
+int player;
+Move bestMove;
+int currentDepth; 
+bool MAN_first = true;
+int main()
+{
+	int i;
+	int n = 0;
+	char board[3][3] = { '7', '8', '9', '4', '5', '6', '1', '2', '3' };
+ 
+	printBoard(board);
+ 
+	for (i = 0; i < MAX_MOVES; i++)
+	{
+		getNextMove(board);
+		win(board);
+		n++;
+	}
+ 
+	if (n = MAX_MOVES)
+		cout << "gameover";
+ 
+	system("PAUSE");
+	return 0;
+}
+void win(char a[3][3])
+{
+	int i, j, k;
+	char key;
+	if ((a[0][0] == a[1][1] && a[1][1] == a[2][2] && a[2][2] == a[0][0]) || (a[2][0] == a[1][1] && a[1][1] == a[0][2] && a[2][0] == a[0][2]))
+	{
+		key = a[0][0];
+		whowin(key);
+	}
+	else
+	{
+		for (i = 0; i < 3; i++)
+			for (j = 0; j < 3; j++)
+				if (a[i][j] == 15 || a[i][j] == 'X')
+				{
+					key = a[i][j];
+					for (k = 0; k < 3; k++)
+					{
+						if (a[i][k] != key)
+							break;
+					}
+					if (k == 3)
+						whowin(key);
+					for (k = 0; k < 3; k++)
+					{
+						if (a[k][j] != key)
+							break;
+					}
+					if (k == 3)
+						whowin(key);
+				}
+	}
+}
+void whowin(char key)
+{
+	if (key == 15)
+		cout << "用户 Win!" << endl;
+	else
+		cout << "机器人 Win!" << endl;
+	exit(0);
+}
+void printBoard(char board[3][3])
+{
+	cout << board[0][0] << " | " << board[0][1] << " | " << board[0][2] << endl;
+	cout << "--+---+--" << endl;
+	cout << board[1][0] << " | " << board[1][1] << " | " << board[1][2] << endl;
+	cout << "--+---+--" << endl;
+	cout << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << endl;
+}
+ 
+void getNextMove(char board[3][3])
+{
+	int i, j, s, t;
+	char m;
+	while (1)
+	{
+		s = -1;
+		t = -1;
+		cout << "Make your move: ";
+		cin >> m;
+		for (i = 0; i < 3; i++)
+			for (j = 0; j < 3; j++)
+				if (board[i][j] == m)
+				{
+					s = i;
+					t = j;
+				}
+		if (s == -1 && t == -1)
+			cout << "that point already has a pawn!" << endl;
+		else
+			break;
+	}
+	if (foot % 2 == 0)
+		board[s][t] = 15;
+	else
+		board[s][t] = 'X';
+	foot++;
+	system("cls");
+	printBoard(board);
+}
+int evaluteMap() {
+ 
+	bool flag = true;
+	int i, j;
+ 
+	if (isWin() == COM)
+		return MAX_NUM;//如果计算机赢了，返回最大值
+	if (isWin() == MAN)
+		return -MAX_NUM;//如果计算机输了，返回最小值	
+
+ 
+ 
+	int count = 0;//该变量用来表示评估函数的值
+				  //将棋盘中的空格填满自己的棋子，既将棋盘数组中的0变为1
+	for (i = 0; i < 3; i++)
+		for (j = 0; j < 3; j++)
+		{
+			if (board[i][j] == 0)
+				tempBoard[i][j] = COM;
+			else
+				tempBoard[i][j] = board[i][j];
+		}
+			//电脑一方
+	//计算每一行中有多少行的棋子连成3个的
+	for (i = 0; i < 3; i++)
+		count += (tempBoard[i][0] + tempBoard[i][1] + tempBoard[i][2]) / 3;
+	for (i = 0; i < 3; i++)
+		count += (tempBoard[0][i] + tempBoard[1][i] + tempBoard[2][i]) / 3;
+	count += (tempBoard[0][0] + tempBoard[1][1] + tempBoard[2][2]) / 3;
+	count += (tempBoard[2][0] + tempBoard[1][1] + tempBoard[0][2]) / 3;
+ 
+ 
+ 
+	//将棋盘中的空格填满对方的棋子，既将棋盘数组中的0变为1
+	for (i = 0; i < 3; i++)
+		for (j = 0; j < 3; j++)
+		{
+			if (board[i][j] == 0)
+				tempBoard[i][j] = MAN;
+			else tempBoard[i][j] = board[i][j];
+		}
+	//对方
+	//计算每一行中有多少行的棋子连成3个的
+	for (i = 0; i < 3; i++)
+		count += (tempBoard[i][0] + tempBoard[i][1] + tempBoard[i][2]) / 3;
+	for (i = 0; i < 3; i++)
+		count += (tempBoard[0][i] + tempBoard[1][i] + tempBoard[2][i]) / 3;
+	count += (tempBoard[0][0] + tempBoard[1][1] + tempBoard[2][2]) / 3;
+	count += (tempBoard[2][0] + tempBoard[1][1] + tempBoard[0][2]) / 3;
+ 
+	return count;
+}
