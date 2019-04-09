@@ -27,6 +27,10 @@
     - [搜索与博弈](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%8D%9A%E5%BC%88)
     - [智能计算及其应用](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8)
     - [机器学习](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0)
+    - [人工神经网络及其应用]()
+    - [深度学习]()
+    - [AI伦理]()
+    - [AI与游戏]()
 - ## [实验内容](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C)
     - [实验一：AI入门实践](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%80-AI%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5)
         1. 掌握手写数字识别系统的运行机制，以及基于图片识别数字的基本方法。
