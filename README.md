@@ -21,67 +21,30 @@
 
 # 目录
 
-## [教学资料](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99)
-
-### [绪论](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E7%BB%AA%E8%AE%BA)
-
-1. 什么是人工智能？为什么那么厉害？
-
-2. AlphaGo未来有没有可能被人类打败？
-
-3. 人工智能技术未来有没有可能取代人类？为什么？
-
-4. 人工智能可以帮助人类完成哪些事情？
-
-5. 人工智能已经出现在哪些领域，今后还会出现在哪些领域？
-
-### [人工智能应用场景](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF)
-1. 什么领域适合人工智能？
-2. 万物皆有AI
-3. AI开放平台
-4. 人工智能的应用场景在哪儿？
-    a. 计算机视觉
-    b. 语音处理
-    c. 对话系统
-    d. 机器翻译 
-
-### [搜索与博弈](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%8D%9A%E5%BC%88)
-1. 搜索基本概念
-2. 搜索策略：盲目和启发式
-3. 博弈树
-    a. 极小极大算法
-    b. alpha-beta剪枝
-
-### [智能计算及其应用](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8)
-1. 遗传算法
-2. 案例介绍：拼图游戏（参考北大陈斌MOOC）
-3. 粒子群算法
-4. 案例介绍：音乐生成器
-
-
-## [实验内容](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C)
-
-### [实验一：AI入门实践](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%80-AI%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5)
-1. 掌握手写数字识别系统的运行机制，以及基于图片识别数字的基本方法。
-2. 了解VS tools for AI，[手写数字识别案例](https://github.com/Microsoft/ai-edu/tree/master/B-%E6%95%99%E5%AD%A6%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%AE%9E%E8%B7%B5/B7-%E8%87%AA%E6%9E%84%E5%BB%BA%EF%BC%8D%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B-%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB)
-3. 实现基本的手写数字识别系统，并在此基础上扩展。
-
-### [实验二：启发算法求解井字棋](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%BA%8C-%E5%90%AF%E5%8F%91%E7%AE%97%E6%B3%95%E6%B1%82%E8%A7%A3%E4%BA%95%E5%AD%97%E6%A3%8B)
-1. 熟悉和掌握启发式搜索的定义、估价函数和算法过程。
-2. 能利用启发算法求解井字棋游戏，理解求解流程和搜索顺序。
-3. 掌握启发式函数的编写以及各类启发式函数效果的比较。
-
-### [实验三：遗传算法求Hello](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%89-%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0Hello)
-1. 熟悉和掌握遗传算法的原理、流程和编码策略。
-2. 参考拼图游戏给出的遗传算法核心代码，用遗传算法求解字符串显示的优化问题.
-3. 分析遗传算法求解不同规模字符串显示问题的算法性能
-
-### [团队项目：确定选题]()
-1. 组建团队和确立选题
-2. 完成团队立项报告，内容包括：
- a. 团队名、团队成员介绍（学号、姓名、承担角色）
- b. 源码仓库地址（github账号）
- c. 拟作的团队选题
- d. 选题需要解决的问题
- e. 时间进度安排（2019.4.14-2019.5.29）
+- ## [教学资料](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99)
+    - ### [绪论](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E7%BB%AA%E8%AE%BA)
+    - ### [人工智能应用场景](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF)
+    - ### [搜索与博弈](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%8D%9A%E5%BC%88)
+    - ### [智能计算及其应用](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8)
+- ## [实验内容](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C)
+    - ### [实验一：AI入门实践](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%80-AI%E5%85%A5%E9%97%A8%E5%AE%9E%E8%B7%B5)
+        1. 掌握手写数字识别系统的运行机制，以及基于图片识别数字的基本方法。
+        2. 了解VS tools for AI，[手写数字识别案例](https://github.com/Microsoft/ai-edu/tree/master/B-%E6%95%99%E5%AD%A6%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%AE%9E%E8%B7%B5/B7-%E8%87%AA%E6%9E%84%E5%BB%BA%EF%BC%8D%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B-%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB)
+        3. 实现基本的手写数字识别系统，并在此基础上扩展。
+    - ### [实验二：启发算法求解井字棋](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%BA%8C-%E5%90%AF%E5%8F%91%E7%AE%97%E6%B3%95%E6%B1%82%E8%A7%A3%E4%BA%95%E5%AD%97%E6%A3%8B)
+        1. 熟悉和掌握启发式搜索的定义、估价函数和算法过程。
+        2. 能利用启发算法求解井字棋游戏，理解求解流程和搜索顺序。
+        3. 掌握启发式函数的编写以及各类启发式函数效果的比较。
+    - ### [实验三：遗传算法求Hello](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%B8%89-%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0Hello)
+        1. 熟悉和掌握遗传算法的原理、流程和编码策略。
+        2. 参考拼图游戏给出的遗传算法核心代码，用遗传算法求解字符串显示的优化问题.
+        3. 分析遗传算法求解不同规模字符串显示问题的算法性能
+    - ### [团队项目：确定选题]()
+        1. 组建团队和确立选题
+        2. 完成团队立项报告，内容包括：
+             a. 团队名、团队成员介绍（学号、姓名、承担角色）
+             b. 源码仓库地址（github账号）
+             c. 拟作的团队选题
+             d. 选题需要解决的问题
+             e. 时间进度安排（2019.4.14-2019.5.29）
 
