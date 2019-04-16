@@ -1,0 +1,13 @@
+.chessman.check{
+    position: relative;
+}
+.chessman.check .material-icons{
+    position: absolute;
+    margin: 18%;
+}
+.chessman .material-icons {
+    font-size: 4em; 
+}
+.chessman .cross {
+
+}
