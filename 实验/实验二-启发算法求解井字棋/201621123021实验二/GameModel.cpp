@@ -1,0 +1,240 @@
+#include <utility>
+#include <stdlib.h>
+#include <time.h>
+#include "GameModel.h"
+#include<QDebug>
+GameModel::GameModel()
+{
+
+}
+
+void GameModel::startGame(GameType type)
+{
+    gameType = type;
+    // 初始棋盘
+    gameMapVec.clear();
+    for (int i = 0; i < kBoardSizeNum+1; i++)
+    {
+        std::vector<int> lineBoard;
+        for (int j = 0; j < kBoardSizeNum+1; j++)
+            lineBoard.push_back(0);
+        gameMapVec.push_back(lineBoard);
+    }
+
+    // 如果是AI模式，需要初始化评分数组
+    if (gameType == BOT)
+    {
+        scoreMapVec.clear();
+        for (int i = 0; i < kBoardSizeNum+1; i++)
+        {
+            std::vector<int> lineScores;
+            for (int j = 0; j < kBoardSizeNum+1; j++)
+                lineScores.push_back(0);
+            scoreMapVec.push_back(lineScores);
+        }
+    }
+
+    if (gameType == BOTVS)
+    {
+        scoreMapVec.clear();
+        for (int i = 0; i < kBoardSizeNum+1; i++)
+        {
+            std::vector<int> lineScores;
+            for (int j = 0; j < kBoardSizeNum+1; j++)
+                lineScores.push_back(0);
+            scoreMapVec.push_back(lineScores);
+        }
+    }
+    // 己方下为true,对方下位false
+    playerFlag = true;
+//    for (int i=0;i<=3;i++) {
+//        for(int j=0;j<=3;j++){
+//            qDebug()<<gameMapVec[i][j];
+//        }
+//        qDebug()<<endl;
+//    }
+
+}
+
+void GameModel::updateGameMap(int row, int col)
+{
+    if (playerFlag)
+        gameMapVec[row][col] = 1;
+    else
+        gameMapVec[row][col] = -1;
+
+    // 换手
+    playerFlag = !playerFlag;
+    for (int i=0;i<=3;i++) {
+        for(int j=0;j<=3;j++){
+            qDebug()<<gameMapVec[i][j];
+        }
+        qDebug()<<endl;
+    }
+}
+
+void GameModel::actionByPerson(int row, int col)
+{
+    updateGameMap(row, col);
+}
+
+void GameModel::actionByAI(int &clickRow, int &clickCol)
+{
+    // 计算评分
+    calculateScore();
+
+    // 从评分中找出最大分数的位置
+    int maxScore = 0;
+    std::vector<std::pair<int, int>> maxPoints;
+
+    for (int row = 1; row <= kBoardSizeNum; row++)
+        for (int col = 1; col <= kBoardSizeNum; col++)
+        {
+            // 前提是这个坐标是空的
+            if (gameMapVec[row][col] == 0)
+            {
+                if (scoreMapVec[row][col] > maxScore)          // 找最大的数和坐标
+                {
+                    maxPoints.clear();
+                    maxScore = scoreMapVec[row][col];
+                    maxPoints.push_back(std::make_pair(row, col));
+                }
+                else if (scoreMapVec[row][col] == maxScore)     // 如果有多个最大的数，都存起来
+                    maxPoints.push_back(std::make_pair(row, col));
+            }
+        }
+
+    // 随机落子，如果有多个点的话
+    srand((unsigned)time(0));
+    int index = rand() % maxPoints.size();
+
+    std::pair<int, int> pointPair = maxPoints.at(index);
+    clickRow = pointPair.first; // 记录落子点
+    clickCol = pointPair.second;
+    qDebug()<<clickRow<<clickCol;
+    updateGameMap(clickRow, clickCol);
+}
+
+// 最关键的计算评分函数
+void GameModel::calculateScore()
+{
+    // 统计玩家或者电脑连成的子
+//    int personNum = 0; // 玩家连成子的个数
+//    int botNum = 0; // AI连成子的个数
+//    int emptyNum = 0; // 各方向空白位的个数
+    int count=0;
+    // 清空评分数组
+    scoreMapVec.clear();
+    tempMapVec.clear();
+    for (int i = 0; i <= kBoardSizeNum; i++)
+    {
+        std::vector<int> lineScores;
+        for (int j = 0; j <= kBoardSizeNum; j++)
+            lineScores.push_back(0);
+        tempMapVec.push_back(lineScores);
+    }
+    for (int i = 0; i <= kBoardSizeNum; i++)
+    {
+        std::vector<int> lineScores;
+        for (int j = 0; j <= kBoardSizeNum; j++)
+            lineScores.push_back(0);
+        scoreMapVec.push_back(lineScores);
+    }
+    for (int row=0;row<=kBoardSizeNum;row++) {
+        for (int col=0;col<=kBoardSizeNum;col++) {
+            for (int i=0;i<=kBoardSizeNum;i++) {
+                for(int j=0;j<=kBoardSizeNum;j++){
+                    if(gameMapVec[i][j]==0)
+                        tempMapVec[i][j]=1;
+                }
+            }
+            tempMapVec[row][col]=1;
+                    for (int i=1;i<=kBoardSizeNum;i++)
+                        count+=(tempMapVec[i][1]+tempMapVec[i][2]+tempMapVec[i][3])/3;
+                    for(int i=1;i<=kBoardSizeNum;i++)
+                        count+=(tempMapVec[1][i]+tempMapVec[2][i]+tempMapVec[3][i])/3;
+                    count+=(tempMapVec[1][1]+tempMapVec[2][2]+tempMapVec[3][3])/3;
+                    count+=(tempMapVec[3][1]+tempMapVec[2][2]+tempMapVec[1][3])/3;
+
+              for (int i=0;i<=kBoardSizeNum;i++) {
+                        for(int j=0;j<=kBoardSizeNum;j++){
+                            if(gameMapVec[i][j]==0)
+                                tempMapVec[i][j]=-1;
+                        }
+                    }
+              tempMapVec[row][col]=0;
+              for (int i=1;i<=kBoardSizeNum;i++)
+                  count+=(tempMapVec[i][1]+tempMapVec[i][2]+tempMapVec[i][3])/3;
+              for(int i=1;i<=kBoardSizeNum;i++)
+                  count+=(tempMapVec[1][i]+tempMapVec[2][i]+tempMapVec[3][i])/3;
+              count+=(tempMapVec[1][1]+tempMapVec[2][2]+tempMapVec[3][3])/3;
+              count+=(tempMapVec[3][1]+tempMapVec[2][2]+tempMapVec[1][3])/3;
+            scoreMapVec[row][col]=count;
+        }
+    }
+
+}
+
+bool GameModel::isWin(int row, int col)
+{
+    // 横竖斜四种大情况，每种情况都根据当前落子往后遍历3个棋子，有一种符合就算赢
+    // 水平方向
+    for (int i = 0; i < 3; i++)
+    {
+
+        // 往左5个，往右匹配4个子，20种情况
+        if (col - i > 0 &&
+            col - i + 2 < kBoardSizeNum+1 &&
+            gameMapVec[row][col - i] == gameMapVec[row][col - i + 1] &&
+            gameMapVec[row][col - i] == gameMapVec[row][col - i + 2] )
+            return true;
+    }
+
+    // 竖直方向(上下延伸4个)
+    for (int i = 0; i < 3; i++)
+    {
+        if (row - i > 0 &&
+            row - i + 2 < kBoardSizeNum+1 &&
+            gameMapVec[row - i][col] == gameMapVec[row - i + 1][col] &&
+            gameMapVec[row - i][col] == gameMapVec[row - i + 2][col] )
+            return true;
+    }
+
+    // 左斜方向
+    for (int i = 0; i < 3; i++)
+    {
+        if (row + i < kBoardSizeNum+1 &&
+            row + i - 2 > 0 &&
+            col - i > 0 &&
+            col - i + 2 < kBoardSizeNum+1 &&
+            gameMapVec[row + i][col - i] == gameMapVec[row + i - 1][col - i + 1] &&
+            gameMapVec[row + i][col - i] == gameMapVec[row + i - 2][col - i + 2] )
+            return true;
+    }
+
+    // 右斜方向
+    for (int i = 0; i < 3; i++)
+    {
+        if (row - i > 0 &&
+            row - i + 2 < kBoardSizeNum+1 &&
+            col - i > 0 &&
+            col - i + 2 < kBoardSizeNum+1 &&
+            gameMapVec[row - i][col - i] == gameMapVec[row - i + 1][col - i + 1] &&
+            gameMapVec[row - i][col - i] == gameMapVec[row - i + 2][col - i + 2] )
+            return true;
+    }
+    return false;
+}
+
+bool GameModel::isDeadGame()
+{
+    // 所有空格全部填满
+    for (int i = 1; i < kBoardSizeNum+1; i++)
+        for (int j = 1; j < kBoardSizeNum+1; j++)
+        {
+            if (!(gameMapVec[i][j] == 1 || gameMapVec[i][j] == -1))
+                return false;
+        }
+    return true;
+}
+
