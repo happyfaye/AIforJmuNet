@@ -1,5 +1,5 @@
 ## 教学资料
-### [参考MOOC：](https://www.icourse163.org/learn/ZJUT-1002694018?tid=1003324007#/learn/announce)
+### [参考MOOC：人工智能导论](https://www.icourse163.org/learn/ZJUT-1002694018?tid=1003324007#/learn/announce)
 
 ### [绪论](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E7%BB%AA%E8%AE%BA)
 
