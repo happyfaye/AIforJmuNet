@@ -30,6 +30,7 @@
     - [绪论](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E7%BB%AA%E8%AE%BA)
     - [人工智能应用场景](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF)
     - [搜索与博弈](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%8D%9A%E5%BC%88)
+    - [知识工程与知识图谱](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E7%9F%A5%E8%AF%86%E5%B7%A5%E7%A8%8B%E4%B8%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1)
     - [智能计算及其应用](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8)
     - [机器学习](https://github.com/happyfaye/AIforJmuNet/tree/master/%E6%95%99%E5%AD%A6%E8%B5%84%E6%96%99/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0)
     - [人工神经网络及其应用]()
