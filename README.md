@@ -41,7 +41,7 @@
         1. 掌握手写数字识别系统的运行机制，以及基于图片识别数字的基本方法。
         2. 了解VS tools for AI，[手写数字识别案例](https://github.com/Microsoft/ai-edu/tree/master/B-%E6%95%99%E5%AD%A6%E6%A1%88%E4%BE%8B%E4%B8%8E%E5%AE%9E%E8%B7%B5/B7-%E8%87%AA%E6%9E%84%E5%BB%BA%EF%BC%8D%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B-%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB)
         3. 实现基本的手写数字识别系统，并在此基础上扩展。
-    - [实验二：启发算法求解井字棋](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%BA%8C-%E5%90%AF%E5%8F%91%E7%AE%97%E6%B3%95%E6%B1%82%E8%A7%A3%E4%BA%95%E5%AD%97%E6%A3%8B)
+    - [实验二：启发算法求解迷宫寻路问题](https://github.com/happyfaye/AIforJmuNet/tree/master/%E5%AE%9E%E9%AA%8C/%E5%AE%9E%E9%AA%8C%E4%BA%8C-%E5%90%AF%E5%8F%91%E7%AE%97%E6%B3%95%E6%B1%82%E8%A7%A3%E4%BA%95%E5%AD%97%E6%A3%8B)
         1. 熟悉和掌握启发式搜索的定义、估价函数和算法过程。
         2. 能利用启发算法求解井字棋游戏，理解求解流程和搜索顺序。
         3. 掌握启发式函数的编写以及各类启发式函数效果的比较。
